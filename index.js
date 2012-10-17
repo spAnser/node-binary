@@ -270,16 +270,27 @@ exports.parse = function parse (buffer) {
     };
     
     self.buffer = function (name, size) {
+        if (size==null) {
+          size=buffer.length;
+        }
         if (typeof size === 'string') {
             size = vars.get(size);
         }
+
         var buf = buffer.slice(offset, Math.min(buffer.length, offset + size));
         offset += size;
         vars.set(name, buf);
         
         return self;
     };
-    
+    self.string = function(name, size) {
+      if (size==null){
+        size=buffer.length;
+      }
+      vars.set(name, buffer.toString( 'utf8', offset, Math.min(buffer.length, offset + size)));
+      offset += size;
+      return self;
+    };
     self.skip = function (bytes) {
         if (typeof bytes === 'string') {
             bytes = vars.get(bytes);
@@ -328,7 +339,8 @@ exports.parse = function parse (buffer) {
     self.eof = function () {
         return offset >= buffer.length;
     };
-    
+
+
     return self;
 };
 
