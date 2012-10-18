@@ -299,7 +299,7 @@ exports.parse = function parse (buffer) {
         
         return self;
     };
-    
+
     self.scan = function (name, search) {
         if (typeof search === 'string') {
             search = new Buffer(search);
@@ -335,7 +335,9 @@ exports.parse = function parse (buffer) {
         vars.store = {};
         return self;
     };
-    
+    self.tell = function() {
+      return offset; 
+    }
     self.eof = function () {
         return offset >= buffer.length;
     };
