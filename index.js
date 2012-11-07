@@ -291,6 +291,12 @@ exports.parse = function parse (buffer) {
       offset += size;
       return self;
     };
+    self.cstring = function(name, size) {
+      self.string( name, size);
+      s = vars.get( name);
+      vars.set(name, s.slice(0, s.indexOf('\0')));
+      return self;
+    };
     self.skip = function (bytes) {
         if (typeof bytes === 'string') {
             bytes = vars.get(bytes);
