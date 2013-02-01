@@ -335,9 +335,10 @@ exports.parse = function parse (buffer) {
             );
             if (j === search.length) break;
         }
-        
-        vars.set(name, buffer.slice(offset, offset + i));
-        offset += i + search.length;
+        if(!self.eof()){ 
+            vars.set(name, buffer.slice(offset, offset + i));
+            offset += i + search.length;
+        }
         return self;
     };
     
