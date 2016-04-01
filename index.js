@@ -296,6 +296,11 @@ exports.parse = function parse (buffer) {
       if (size==null){
         size=buffer.length;
       }
+      if (typeof size === 'string') {
+        size = vars.get(size);
+      } else if (size === undefined || size !== size) {
+        size = 0;
+      }
       vars.set(name, buffer.toString( 'utf8', offset, Math.min(buffer.length, offset + size)));
       offset += size;
       return self;
