@@ -234,7 +234,10 @@ console.log("entries", entries);
 b.string(key, size)
 ---------
 
-Read <size> bytes as a utf8 string, or read until end of buffer if size not specified
+Read `size` bytes as a utf8 string, or read until end of buffer if size not
+specified. Puts the resulting string in the variable stash at `key`.
+If `size` is a string, use the value at `vars[size]`. The key follows the same
+dotted address rules as the word functions.
 
 ``` js
 var vars = binary.parse(new Buffer([97, 32, 99, 97, 116, 32, 119, 105, 110, 115]))
@@ -248,7 +251,8 @@ console.log(vars);
 b.cstring(key, size)
 ---------
 
-Read <size> bytes as a null-terminated utf8 string (slices off the null character and anything after it, or last character if no null found)
+Same as `string()`, but read as a null-terminated utf8 string (slices off the
+null character and anything after it, or last character if no null found)
 
 ``` js
 var vars = binary.parse(new Buffer([97, 32, 99, 97, 116, 32, 119, 105, 110, 115, 0]))
@@ -262,7 +266,8 @@ console.log(vars);
 b.skip(size)
 ---------
 
-Skip <size> bytes
+Skip <size> bytes. If `size` is a string, use the value at `vars[size]`. The
+key follows the same dotted address rules as the word functions.
 
 ``` js
 var vars = binary.parse(new Buffer([5, 13, 80]))
