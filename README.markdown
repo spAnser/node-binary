@@ -163,7 +163,7 @@ binary.parse(new Buffer([4, 1, 0, 1, 0]))
     .word8lu('dataLength')
     .tap(function (vars) {
         var getInt;
-        if (vars.dataLength <= 4) {
+        if (vars.dataLength <= 4 && vars.dataLength !== 3) {
             getInt = "word" + (8 * vars.dataLength) + "lu";
             this[getInt]('data');
         } else {
@@ -296,7 +296,7 @@ Clear the variable stash entirely.
 ``` js
 var pos = binary.parse(new Buffer([5, 0, 80, 11, 184]))
     .word8lu('preFlush')
-    .word8lu('preFlush2)
+    .word8lu('preFlush2')
     .flush()
     .word8lu('postFlush')
     .word8lu('postFlush2')
@@ -317,7 +317,7 @@ installation
 To install with [npm](http://github.com/npm/npm):
 
 ```
-npm install binary@Casear/node-binary#0.3.0
+npm install binary@Casear/node-binary
 ```
 
 notes
