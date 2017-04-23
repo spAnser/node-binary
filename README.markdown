@@ -84,7 +84,7 @@ In parse mode, methods will set their keys to `null` if the buffer isn't big
 enough except `buffer()` and `scan()` which read up up to the end of the buffer
 and stop.
 
-b.word{8,16,32,64}{l,b}{e,u,s}(key)
+b.word{8,16,24,32,64}{l,b}{e,u,s}(key)
 -----------------------------------
 
 Parse bytes in the buffer or stream given:
